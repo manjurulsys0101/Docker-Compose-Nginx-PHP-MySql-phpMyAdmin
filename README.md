@@ -11,3 +11,4 @@ To Install Nginx PHP phpMyAdmin in docker Follow the below step:
 8. docker-compose up -d
 9. Check nginx URL: http://docker_host_ip:8080 
 10. Check mysql Url: http://docker_host_ip:8081   
+11. To remove container:  docker-compose down 
