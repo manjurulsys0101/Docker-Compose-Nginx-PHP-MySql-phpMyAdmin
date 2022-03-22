@@ -37,7 +37,7 @@ services:
         environment:
             PMA_HOST: mysql
             PMA_USER: root
-            PMA_PASSWORD: mi121mi
+            PMA_PASSWORD: your_root_password
         ports:
             - "8081:80"
         restart: always
