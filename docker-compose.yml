@@ -15,21 +15,12 @@ services:
             - ./code:/code
             - ./php.ini:/usr/local/etc/php/php.ini
     mysql:
-        image: mariadb
-        container_name: mysql
-        command: --transaction-isolation=READ-COMMITTED --log-bin=ROW
-        restart: unless-stopped
-        volumes: 
-            - ./database:/var/lib/mysql
+        image: mysql
         environment:
-            MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
-            MYSQL_PASSWORD_FILE: /run/secrets/mysql_user_password
-            MYSQL_DATABASE: testdb
-            MYSQL_USER: testuser
-            MYSQL_INITDB_SKIP_TZINFO: 1
-        secrets:
-          - mysql_root_password
-          - mysql_user_password
+            MYSQL_ROOT_PASSWORD: root
+        restart: always
+        volumes:
+            - ./database:/var/lib/mysql
         ports:
             - "3306:3306"
     phpmyadmin:
@@ -37,14 +28,9 @@ services:
         environment:
             PMA_HOST: mysql
             PMA_USER: root
-            PMA_PASSWORD: mi121mi
+            PMA_PASSWORD: root
         ports:
             - "8081:80"
         restart: always
         volumes:
             - ./php.ini:/usr/local/etc/php/php.ini
-secrets:
-        mysql_root_password:
-          file: ./secrets/mysql_root_password
-        mysql_user_password:
-          file: ./secrets/mysql_user_password
